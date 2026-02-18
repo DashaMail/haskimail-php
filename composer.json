@@ -1,0 +1,30 @@
+{
+    "repositories": [{
+        "type": "composer",
+        "url": "https://packagist.org"
+    }],
+    "name": "Dashamail/Haski",
+    "license": "MIT",
+    "description": "The officially supported client for Haski (https://haskimail.ru)",
+    "require": {
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "^6.0|^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Haski\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "src/",
+            "tests/"
+        ]
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
