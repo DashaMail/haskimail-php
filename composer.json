@@ -3,7 +3,7 @@
         "type": "composer",
         "url": "https://packagist.org"
     }],
-    "name": "Dashamail/Haski",
+    "name": "dashamail/haski",
     "license": "MIT",
     "description": "The officially supported client for Haski (https://haskimail.ru)",
     "require": {
