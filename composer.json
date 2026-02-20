@@ -3,9 +3,9 @@
         "type": "composer",
         "url": "https://packagist.org"
     }],
-    "name": "dashamail/haski",
+    "name": "dashamail/haskimail-php",
     "license": "MIT",
-    "description": "The officially supported client for Haski (https://haskimail.ru)",
+    "description": "The officially supported PHP client for Haski (https://haskimail.ru)",
     "require": {
         "php": ">=7.0.0",
         "guzzlehttp/guzzle": "^6.0|^7.0"
