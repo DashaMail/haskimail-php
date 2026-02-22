@@ -8,7 +8,7 @@ namespace Haski\Models;
 class HaskiException extends \Exception {
 	var $message;
 	var $httpStatusCode;
-	var $postmarkApiErrorCode;
+	var $haskiApiErrorCode;
 }
 
 ?>

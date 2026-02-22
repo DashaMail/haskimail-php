@@ -16,8 +16,6 @@ class HaskiAdminClient extends HaskiClientBase {
 	 * Create a new HaskiAdminClient.
 	 *
 	 * @param string $accountToken The Account Token used to access the Admin API.
-	 * This token is NOT the same as a Server Token. You can get your account token
-	 * from this page: https://postmarkapp.com/account/edit
 	 *
 	 * @param integer $timeout The timeout, in seconds, that API calls should wait before throwing an exception.
 	 */

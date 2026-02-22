@@ -219,7 +219,7 @@ class HaskiClient extends HaskiClientBase {
 	 *
 	 * @param  integer $count Number of bounces to retrieve
 	 * @param  integer $offset How many bounces to skip (when paging through bounces.)
-	 * @param  string $type The bounce type. (see http://developer.postmarkapp.com/developer-api-bounce.html#bounce-types)
+	 * @param  string $type The bounce type.
 	 * @param  bool $inactive Specifies if the bounce caused Haski to deactivate this email.
 	 * @param  string $emailFilter Filter by email address
 	 * @param  string $tag Filter by tag

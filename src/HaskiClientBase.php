@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Author:   Wildbit (http://wildbit.com)
+ * Author:   Dashamail (https://dashamail.ru/)
  * License:  http://creativecommons.org/licenses/MIT/ MIT
- * Link:     https://github.com/wildbit/postmark-php/
+ * Link:     https://github.com/DashaMail/haskimail-php/
  */
 
 namespace Haski;
@@ -19,7 +19,7 @@ use Haski\Models\HaskiException;
 abstract class HaskiClientBase {
 
 	/**
-	 * BASE_URL is "https://api.postmarkapp.com"
+	 * BASE_URL is "https://api.haskimail.ru"
 	 *
 	 * You may modify this value to disable SSL support, but it is not recommended.
 	 *
@@ -39,8 +39,6 @@ abstract class HaskiClientBase {
 	* be subject to a Man-in-the-middle attack. However, this is still a better outcome
 	* than using no encryption at all.
 	*
-	* If possible, you should try to resolve your PHP install's certificate issues as outline here:
-	* https://github.com/wildbit/postmark-php/wiki/SSL%20Errors%20on%20Windows
 	*/
 	public static $VERIFY_SSL= true;
 
@@ -166,7 +164,7 @@ abstract class HaskiClientBase {
 				$ex = new HaskiException();
 				$body = json_decode($response->getBody(), true);
 				$ex->httpStatusCode = $response->getStatusCode();
-				$ex->postmarkApiErrorCode = $body['ErrorCode'];
+				$ex->haskiApiErrorCode = $body['ErrorCode'];
 				$ex->message = $body['Message'];
 				throw $ex;
 		}
