@@ -1,17 +1,17 @@
 <?php
-namespace Haski\Models;
+namespace Haskimail\Models;
 
 /**
- * The DynamicResponseModel class allows flexible and forgiving access to responses from the Haski API.
+ * The DynamicResponseModel class allows flexible and forgiving access to responses from the Haskimail API.
  *
- * Most responses from the HaskiClient return a DynamicResponseModel, so understanding how it works is useful.
+ * Most responses from the HaskimailClient return a DynamicResponseModel, so understanding how it works is useful.
  *
  * Essentially, you can use either object or array index notation to lookup values. The member names are case insensitive,
  * so that each of these are acceptable ways of accessing "id" on a server response, for example:
  *
  * ```
  * //Create a client instance and get server info.
- * $client = new HaskiClient($server_token);
+ * $client = new HaskimailClient($server_token);
  * $server = $client->getServer();
  *
  * //You have many ways of accessing the same members:

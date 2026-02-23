@@ -1,8 +1,8 @@
 <?php
 
-namespace Haski\Models;
+namespace Haskimail\Models;
 
-class HaskiAttachment implements \JsonSerializable {
+class HaskimailAttachment implements \JsonSerializable {
 
 	private $name;
 	private $mimeType;
@@ -10,15 +10,15 @@ class HaskiAttachment implements \JsonSerializable {
 	private $contentId;
 
 	public static function fromRawData($data, $attachmentName, $mimeType = NULL, $contentId = NULL) {
-		return new HaskiAttachment(base64_encode($data), $attachmentName, $mimeType, $contentId);
+		return new HaskimailAttachment(base64_encode($data), $attachmentName, $mimeType, $contentId);
 	}
 	
 	public static function fromBase64EncodedData($base64EncodedData, $attachmentName, $mimeType = NULL, $contentId = NULL) {
-		return new HaskiAttachment($base64EncodedData, $attachmentName, $mimeType, $contentId);
+		return new HaskimailAttachment($base64EncodedData, $attachmentName, $mimeType, $contentId);
 	}
 	
 	public static function fromFile($filePath, $attachmentName, $mimeType = NULL, $contentId = NULL) {
-		return new HaskiAttachment(base64_encode(file_get_contents($filePath)), $attachmentName, $mimeType, $contentId);
+		return new HaskimailAttachment(base64_encode(file_get_contents($filePath)), $attachmentName, $mimeType, $contentId);
 	}
 
 	#[\ReturnTypeWillChange]

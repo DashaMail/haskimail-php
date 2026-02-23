@@ -1,11 +1,11 @@
 <?php
 
-namespace Haski\Models;
+namespace Haskimail\Models;
 
 /**
- * The exception thrown when the Haski Client recieves an error from the API.
+ * The exception thrown when the Haskimail Client recieves an error from the API.
  */
-class HaskiException extends \Exception {
+class HaskimailException extends \Exception {
 	var $message;
 	var $httpStatusCode;
 	var $haskiApiErrorCode;

@@ -6,17 +6,17 @@
  * Link:     https://github.com/DashaMail/haskimail-php/
  */
 
-namespace Haski;
+namespace Haskimail;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use Haski\Models\HaskiException;
+use Haskimail\Models\HaskimailException;
 
 /**
- * This is the core class that interacts with the Haski API. All clients should
+ * This is the core class that interacts with the Haskimail API. All clients should
  * inherit fromt this class.
  */
-abstract class HaskiClientBase {
+abstract class HaskimailClientBase {
 
 	/**
 	 * BASE_URL is "https://api.haskimail.ru"
@@ -34,7 +34,7 @@ abstract class HaskiClientBase {
 	* In some PHP configurations, SSL/TLS certificates cannot be verified.
 	* Rather than disabling SSL/TLS entirely in these circumstances, you may
 	* disable certificate verification. This is dramatically better than disabling
-	* connecting to the Haski API without TLS, as it's still encrypted,
+	* connecting to the Haskimail API without TLS, as it's still encrypted,
 	* but the risk is that if your connection has been compromised, your application could
 	* be subject to a Man-in-the-middle attack. However, this is still a better outcome
 	* than using no encryption at all.
@@ -99,7 +99,7 @@ abstract class HaskiClientBase {
 	 * @param array $body The content to be used (either as the query, or the json post/put body)
 	 * @return object
 	 *
-	 * @throws HaskiException
+	 * @throws HaskimailException
 	 */
 	protected function processRestRequest($method = NULL, $path = NULL, array $body = []) {
 		$client = $this->getClient();
@@ -107,7 +107,7 @@ abstract class HaskiClientBase {
 		$options = [
 			RequestOptions::HTTP_ERRORS => false,
 			RequestOptions::HEADERS => [
-				'User-Agent' => "Haski-PHP (PHP Version:{$this->version}, OS:{$this->os})",
+				'User-Agent' => "Haskimail-PHP (PHP Version:{$this->version}, OS:{$this->os})",
 				'Accept' => 'application/json',
 				'Content-Type' => 'application/json',
 				$this->authorization_header => $this->authorization_token
@@ -142,26 +142,26 @@ abstract class HaskiClientBase {
 				// Casting BIGINT as STRING instead of the default FLOAT, to avoid loss of precision.
 				return json_decode($response->getBody(), true, 512, JSON_BIGINT_AS_STRING);
 			case 401:
-				$ex = new HaskiException();
+				$ex = new HaskimailException();
 				$ex->message = 'Unauthorized: Missing or incorrect API token in header. ' .
 				'Please verify that you used the correct token when you constructed your client.';
 				$ex->httpStatusCode = 401;
 				throw $ex;
 			case 500:
-				$ex = new HaskiException();
+				$ex = new HaskimailException();
 				$ex->httpStatusCode = 500;
-				$ex->message = 'Internal Server Error: This is an issue with Haski’s servers processing your request. ' .
+				$ex->message = 'Internal Server Error: This is an issue with Haskimail’s servers processing your request. ' .
 				'In most cases the message is lost during the process, ' .
-				'and Haski is notified so that we can investigate the issue.';
+				'and Haskimail is notified so that we can investigate the issue.';
 				throw $ex;
 			case 503:
-				$ex = new HaskiException();
+				$ex = new HaskimailException();
 				$ex->httpStatusCode = 503;
-				$ex->message = 'The Haski API is currently unavailable, please try your request later.';
+				$ex->message = 'The Haskimail API is currently unavailable, please try your request later.';
 				throw $ex;
 			// This should cover case 422, and any others that are possible:
 			default:
-				$ex = new HaskiException();
+				$ex = new HaskimailException();
 				$body = json_decode($response->getBody(), true);
 				$ex->httpStatusCode = $response->getStatusCode();
 				$ex->haskiApiErrorCode = $body['ErrorCode'];

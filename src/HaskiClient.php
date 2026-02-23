@@ -1,26 +1,26 @@
 <?php
 
-namespace Haski;
+namespace Haskimail;
 
-use Haski\Models\DynamicResponseModel as DynamicResponseModel;
-use Haski\HaskiClientBase as HaskiClientBase;
+use Haskimail\Models\DynamicResponseModel as DynamicResponseModel;
+use Haskimail\HaskimailClientBase as HaskimailClientBase;
 
 /**
- * HaskiClient provides the main functionality used to send and analyze email on a "per-Server"
- * basis. If you'd like to manage "Account-wide" configuration, see the HaskiAdminClient.
+ * HaskimailClient provides the main functionality used to send and analyze email on a "per-Server"
+ * basis. If you'd like to manage "Account-wide" configuration, see the HaskimailAdminClient.
  */
-class HaskiClient extends HaskiClientBase {
+class HaskimailClient extends HaskimailClientBase {
 
 	private $server_token = NULL;
 
 	/**
-	 * Create a new HaskiClient.
+	 * Create a new HaskimailClient.
 	 *
 	 * @param string $serverToken The token associated with "Server" you'd like to use to send/receive email from.
 	 * @param integer $timeout The timeout, in seconds to wait for an API call to complete before throwing an Exception.
 	 */
 	function __construct($serverToken, $timeout = 60) {
-		parent::__construct($serverToken, 'X-Haski-Server-Token', $timeout);
+		parent::__construct($serverToken, 'X-Haskimail-Server-Token', $timeout);
 	}
 
 	/**
@@ -32,16 +32,16 @@ class HaskiClient extends HaskiClientBase {
 	 * @param  string $htmlBody  The HTML content of the message, optional if Text Body is specified.
 	 * @param  string $textBody  The text content of the message, optional if HTML Body is specified.
 	 * @param  string $tag  A tag associated with this message, useful for classifying sent messages.
-	 * @param  boolean $trackOpens  True if you want Haski to track opens of HTML emails.
+	 * @param  boolean $trackOpens  True if you want Haskimail to track opens of HTML emails.
 	 * @param  string $replyTo  Reply to email address.
 	 * @param  string $cc  Carbon Copy recipients, comma-separated
 	 * @param  string $bcc  Blind Carbon Copy recipients, comma-separated.
 	 * @param  array $headers  Headers to be included with the sent email message.
-	 * @param  array $attachments  An array of HaskiAttachment objects.
+	 * @param  array $attachments  An array of HaskimailAttachment objects.
 	 * @param  string $trackLinks  Can be any of "None", "HtmlAndText", "HtmlOnly", "TextOnly" to enable link tracking.
-	 * @param  array $metadata  Add metadata to the message. The metadata is an associative array, and values will be evaluated as strings by Haski.
+	 * @param  array $metadata  Add metadata to the message. The metadata is an associative array, and values will be evaluated as strings by Haskimail.
 	 * @param  array $messageStream  The message stream used to send this message. If not provided, the default transactional stream "outbound" will be used.
-         * @throws Models\HaskiException
+         * @throws Models\HaskimailException
          *
 	 * @return DynamicResponseModel
 	 */
@@ -84,14 +84,14 @@ class HaskiClient extends HaskiClientBase {
 	 * @param  array $templateModel  The values to combine with the Templated content.
 	 * @param  boolean $inlineCss  If the template contains an HTMLBody, CSS is automatically inlined, you may opt-out of this by passing 'false' for this parameter.
 	 * @param  string $tag  A tag associated with this message, useful for classifying sent messages.
-	 * @param  boolean $trackOpens  True if you want Haski to track opens of HTML emails.
+	 * @param  boolean $trackOpens  True if you want Haskimail to track opens of HTML emails.
 	 * @param  string $replyTo  Reply to email address.
 	 * @param  string $cc  Carbon Copy recipients, comma-separated
 	 * @param  string $bcc  Blind Carbon Copy recipients, comma-separated.
 	 * @param  array $headers  Headers to be included with the sent email message.
-	 * @param  array $attachments  An array of HaskiAttachment objects.
+	 * @param  array $attachments  An array of HaskimailAttachment objects.
 	 * @param  string $trackLinks  Can be any of "None", "HtmlAndText", "HtmlOnly", "TextOnly" to enable link tracking.
-	 * @param  array $metadata  Add metadata to the message. The metadata is an associative array , and values will be evaluated as strings by Haski.
+	 * @param  array $metadata  Add metadata to the message. The metadata is an associative array , and values will be evaluated as strings by Haskimail.
 	 * @param  array $messageStream  The message stream used to send this message. If not provided, the default transactional stream "outbound" will be used.
 	 * @return DynamicResponseModel
 	 */
@@ -136,7 +136,7 @@ class HaskiClient extends HaskiClientBase {
 	}
 
 	/**
-	 * The Haski API wants an Array of Key-Value pairs, not a dictionary object,
+	 * The Haskimail API wants an Array of Key-Value pairs, not a dictionary object,
 	 * therefore, we need to wrap the elements in an array.
 	 */
 	private function fixHeaders($headers) {
@@ -156,7 +156,7 @@ class HaskiClient extends HaskiClientBase {
 	 * Send multiple emails as a batch
 	 *
 	 * Each email is an associative array of values, but note that the 'Attachments'
-	 * key must be an array of 'HaskiAttachment' objects if you intend to send
+	 * key must be an array of 'HaskimailAttachment' objects if you intend to send
 	 * attachments with an email.
 	 *
 	 * @param array $emailBatch  An array of emails to be sent in one batch.
@@ -188,7 +188,7 @@ class HaskiClient extends HaskiClientBase {
 	 * @param array $emailBatch An array of emails to be sent in one batch.
 	 *
 	 * @return DynamicResponseModel
-	 * @throws Models\HaskiException
+	 * @throws Models\HaskimailException
 	 */
 	function sendEmailBatchWithTemplate($emailBatch = array()) {
 		$final = array();
@@ -220,7 +220,7 @@ class HaskiClient extends HaskiClientBase {
 	 * @param  integer $count Number of bounces to retrieve
 	 * @param  integer $offset How many bounces to skip (when paging through bounces.)
 	 * @param  string $type The bounce type.
-	 * @param  bool $inactive Specifies if the bounce caused Haski to deactivate this email.
+	 * @param  bool $inactive Specifies if the bounce caused Haskimail to deactivate this email.
 	 * @param  string $emailFilter Filter by email address
 	 * @param  string $tag Filter by tag
 	 * @param  string $messageID Filter by MessageID
@@ -288,7 +288,7 @@ class HaskiClient extends HaskiClientBase {
 	}
 
 	/**
-	 * Get the settings for the server associated with this HaskiClient instance
+	 * Get the settings for the server associated with this HaskimailClient instance
 	 * (defined by the $server_token you passed when instantiating this client)
 	 *
 	 * @return DynamicResponseModel
@@ -302,7 +302,7 @@ class HaskiClient extends HaskiClientBase {
 	 * ignored (their existing values will not be modified).
 	 *
 	 * @param  string $name Set the name of the server.
-	 * @param  string $color Set the color for the server in the Haski WebUI (must be: 'purple', 'blue', 'turqoise', 'green', 'red', 'yellow', or 'grey')
+	 * @param  string $color Set the color for the server in the Haskimail WebUI (must be: 'purple', 'blue', 'turqoise', 'green', 'red', 'yellow', or 'grey')
 	 * @param  bool $rawEmailEnabled Enable raw email to be sent with inbound.
 	 * @param  bool $smtpApiActivated Specifies whether or not SMTP is enabled on this server.
 	 * @param  string $inboundHookUrl URL to POST to everytime an inbound event occurs.
@@ -459,7 +459,7 @@ class HaskiClient extends HaskiClientBase {
 	}
 
 	/**
-	 * Request that Haski retry POSTing the specified message to the Server's Inbound Hook.
+	 * Request that Haskimail retry POSTing the specified message to the Server's Inbound Hook.
 	 *
 	 * @param string $id The ID for a message that we wish retry the inbound hook for.
 	 * @return DynamicResponseModel
@@ -1233,7 +1233,7 @@ class HaskiClient extends HaskiClientBase {
 
 	/**
 	 * Archive a message stream. This will disable sending/receiving messages via that stream.
-	 * The stream will also stop being shown in the Haski UI.
+	 * The stream will also stop being shown in the Haskimail UI.
 	 * Once a stream has been archived, it will be deleted (alongside associated data) at the ExpectedPurgeDate in the response.
 	 *
 	 * @param string $id The identifier for the stream you are trying to update.
@@ -1246,7 +1246,7 @@ class HaskiClient extends HaskiClientBase {
 
 	/**
 	 * Unarchive a message stream. This will resume sending/receiving via that stream.
-	 * The stream will also re-appear in the Haski UI.
+	 * The stream will also re-appear in the Haskimail UI.
 	 * A stream can be unarchived only before the stream ExpectedPurgeDate.
 	 *
 	 * @param string $id Identifier of the stream to unarchive.

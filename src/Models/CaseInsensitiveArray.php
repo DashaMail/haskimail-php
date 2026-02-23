@@ -1,5 +1,5 @@
 <?php
-namespace Haski\Models;
+namespace Haskimail\Models;
 
 /**
  * CaseInsensitiveArray allows accessing elements with mixed-case keys.

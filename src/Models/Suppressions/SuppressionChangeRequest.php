@@ -1,5 +1,5 @@
 <?php
-namespace Haski\Models\Suppressions;
+namespace Haskimail\Models\Suppressions;
 
 /**
  * Model describing a request to suppress or reactivate one recipient.

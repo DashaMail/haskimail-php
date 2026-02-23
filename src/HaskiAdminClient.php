@@ -1,26 +1,26 @@
 <?php
 
-namespace Haski;
+namespace Haskimail;
 
-use Haski\Models\DynamicResponseModel as DynamicResponseModel;
-use Haski\HaskiClientBase as HaskiClientBase;
+use Haskimail\Models\DynamicResponseModel as DynamicResponseModel;
+use Haskimail\HaskimailClientBase as HaskimailClientBase;
 
 /**
- * The HaskiAdminClient allows users to access and modify
+ * The HaskimailAdminClient allows users to access and modify
  *  "Account-wide" settings. At this time the API supports
  *  management of the "Sender Signatures", "Domains", and "Servers."
  */
-class HaskiAdminClient extends HaskiClientBase {
+class HaskimailAdminClient extends HaskimailClientBase {
 
 	/**
-	 * Create a new HaskiAdminClient.
+	 * Create a new HaskimailAdminClient.
 	 *
 	 * @param string $accountToken The Account Token used to access the Admin API.
 	 *
 	 * @param integer $timeout The timeout, in seconds, that API calls should wait before throwing an exception.
 	 */
 	function __construct($accountToken, $timeout = 60) {
-		parent::__construct($accountToken, "X-Haski-Account-Token", $timeout);
+		parent::__construct($accountToken, "X-Haskimail-Account-Token", $timeout);
 	}
 
 	/**
@@ -68,7 +68,7 @@ class HaskiAdminClient extends HaskiClientBase {
 	 *
 	 * @param integer $id The ID of the Server we wish to modify.
 	 * @param string $name Set the name of the server.
-	 * @param string $color Set the color for the server in the Haski WebUI (must be: 'purple', 'blue', 'turqoise', 'green', 'red', 'yellow', or 'grey')
+	 * @param string $color Set the color for the server in the Haskimail WebUI (must be: 'purple', 'blue', 'turqoise', 'green', 'red', 'yellow', or 'grey')
 	 * @param bool $rawEmailEnabled Enable raw email to be sent with inbound.
 	 * @param bool $smtpApiActivated Specifies whether or not SMTP is enabled on this server.
 	 * @param string $inboundHookUrl URL to POST to everytime an inbound event occurs.
@@ -118,7 +118,7 @@ class HaskiAdminClient extends HaskiClientBase {
 	 * ignored (their default values will be used).
 	 *
 	 * @param string $name Set the name of the server.
-	 * @param string $color Set the color for the server in the Haski WebUI (must be: 'purple', 'blue', 'turqoise', 'green', 'red', 'yellow', or 'grey')
+	 * @param string $color Set the color for the server in the Haskimail WebUI (must be: 'purple', 'blue', 'turqoise', 'green', 'red', 'yellow', or 'grey')
 	 * @param bool $rawEmailEnabled Enable raw email to be sent with inbound.
 	 * @param bool $smtpApiActivated Specifies whether or not SMTP is enabled on this server.
 	 * @param string $inboundHookUrl URL to POST to everytime an inbound event occurs.
@@ -240,7 +240,7 @@ class HaskiAdminClient extends HaskiClientBase {
 
 	/**
 	 * Cause a new verification email to be sent for an existing (unverified) Sender Signature.
-	 * Sender Signatures require verification before they may be used to send email through the Haski API.
+	 * Sender Signatures require verification before they may be used to send email through the Haskimail API.
 	 *
 	 * @param  integer $id The ID for the Sender Signature to which we wish to resend a verification email.
 	 * @return DynamicResponseModel
@@ -250,9 +250,9 @@ class HaskiAdminClient extends HaskiClientBase {
 	}
 
 	/**
-	 * Request that the Haski API updates verify the SPF records associated
+	 * Request that the Haskimail API updates verify the SPF records associated
 	 * with the Sender Signature's email address's domain. Configuring SPF is not required to use
-	 * Haski, but it is highly recommended, and can improve delivery rates.
+	 * Haskimail, but it is highly recommended, and can improve delivery rates.
 	 *
    * @deprecated verifyDomainSPF replaces this method
 	 * @param  integer $id The ID for the Sender Signature for which we wish to verify the SPF records.
@@ -343,9 +343,9 @@ class HaskiAdminClient extends HaskiClientBase {
 	}
 
   /**
-	 * Request that the Haski API verify the SPF records associated
+	 * Request that the Haskimail API verify the SPF records associated
 	 * with the Domain. Configuring SPF is not required to use
-	 * Haski, but it is highly recommended, and can improve delivery rates.
+	 * Haskimail, but it is highly recommended, and can improve delivery rates.
 	 *
 	 * @param  integer $id The ID for the Domain for which we wish to verify the SPF records.
 	 * @return DynamicResponseModel

@@ -1,5 +1,5 @@
 <?php
-namespace Haski\Models\Webhooks;
+namespace Haskimail\Models\Webhooks;
 
 /**
  * Model describing Basic HTTP Authentication.
