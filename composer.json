@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Haski\\": "src/"
+            "Haskimail\\": "src/"
         }
     },
     "autoload-dev": {
