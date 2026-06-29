@@ -25,8 +25,8 @@ abstract class HaskimailClientBase {
 	 *
 	 * @var string
 	 */
-	//public static $BASE_URL = "api.haskimail.ru";
-	public static $BASE_URL = "dev.api.haskimail.ru";
+	public static $BASE_URL = "api.haskimail.ru";
+	//public static $BASE_URL = "dev.api.haskimail.ru";
 
 	/**
 	* VERIFY_SSL is defaulted to "true".
