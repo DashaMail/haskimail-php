@@ -249,32 +249,6 @@ class HaskimailClient extends HaskimailClientBase {
 	}
 
 	/**
-	 * Locate information on a specific email bounce.
-	 *
-	 * @param  integer $id The ID of the bounce to get.
-	 *
-	 * If the $id value is greater than PHP_INT_MAX, the ID can be passed as a string.
-	 *
-	 * @return DynamicResponseModel
-	 */
-	function getBounce($id) {
-		return new DynamicResponseModel($this->processRestRequest('GET', "/bounces/$id"));
-	}
-
-	/**
-	 * Cause the email address associated with a Bounce to be reactivated.
-	 *
-	 * @param  integer $id The bounce which has a deactivated email address.
-	 *
-	 * If the $id value is greater than PHP_INT_MAX, the ID can be passed as a string.
-	 *
-	 * @return DynamicResponseModel
-	 */
-	function activateBounce($id) {
-		return new DynamicResponseModel($this->processRestRequest('PUT', "/bounces/$id/activate"));
-	}
-
-	/**
 	 * Get the settings for the server associated with this HaskimailClient instance
 	 * (defined by the $server_token you passed when instantiating this client)
 	 *
