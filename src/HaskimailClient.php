@@ -153,59 +153,6 @@ class HaskimailClient extends HaskimailClientBase {
 	}
 
 	/**
-	 * Send multiple emails as a batch
-	 *
-	 * Each email is an associative array of values, but note that the 'Attachments'
-	 * key must be an array of 'HaskimailAttachment' objects if you intend to send
-	 * attachments with an email.
-	 *
-	 * @param array $emailBatch  An array of emails to be sent in one batch.
-	 *
-	 * @return DynamicResponseModel
-	 */
-	function sendEmailBatch($emailBatch = array()) {
-
-		$final = array();
-
-		foreach ($emailBatch as $email) {
-			foreach ($email as $emailIdx => $emailValue) {
-				if (strtolower($emailIdx) == 'headers') {
-					$email[$emailIdx] = $this->fixHeaders($emailValue);
-				}
-			}
-			array_push($final, $email);
-		}
-
-		return new DynamicResponseModel($this->processRestRequest('POST', '/email/batch', $final));
-	}
-
-	/**
-	 * Send multiple emails with a template as a batch
-	 *
-	 * Each email is an associative array of values. See sendEmailWithTemplate()
-	 * for details on required values.
-	 *
-	 * @param array $emailBatch An array of emails to be sent in one batch.
-	 *
-	 * @return DynamicResponseModel
-	 * @throws Models\HaskimailException
-	 */
-	function sendEmailBatchWithTemplate($emailBatch = array()) {
-		$final = array();
-
-		foreach ($emailBatch as $email) {
-			foreach ($email as $emailIdx => $emailValue) {
-				if (strtolower($emailIdx) === 'headers') {
-					$email[$emailIdx] = $this->fixHeaders($emailValue);
-				}
-			}
-			$final[] = $email;
-		}
-
-		return new DynamicResponseModel($this->processRestRequest('POST', '/email/batchWithTemplates', array('Messages' => $final)));
-	}
-
-	/**
 	 * Get an overview of the delivery statistics for all email that has been sent through this Server.
 	 *
 	 * @return DynamicResponseModel
