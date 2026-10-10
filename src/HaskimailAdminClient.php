@@ -47,7 +47,7 @@ class HaskimailAdminClient extends HaskimailClientBase {
 		$query['offset'] = $offset;
 		$query['name'] = $name;
 
-		return new DynamicResponseModel($this->processRestRequest('GET', '/servers/', $query));
+		return new DynamicResponseModel($this->processRestRequest('GET', '/servers', $query));
 	}
 
 	/**
@@ -158,7 +158,7 @@ class HaskimailAdminClient extends HaskimailClientBase {
 		$body["DeliveryHookUrl"] = $deliveryHookUrl;
 		$body["EnableSmtpApiErrorHooks"] = $enableSmtpApiErrorHooks;
 
-		return new DynamicResponseModel($this->processRestRequest('POST', '/servers/', $body));
+		return new DynamicResponseModel($this->processRestRequest('POST', '/servers', $body));
 	}
 
 	/**
@@ -288,7 +288,7 @@ class HaskimailAdminClient extends HaskimailClientBase {
 		$query['count'] = $count;
 		$query['offset'] = $offset;
 
-		return new DynamicResponseModel($this->processRestRequest('GET', '/domains/', $query));
+		return new DynamicResponseModel($this->processRestRequest('GET', '/domains', $query));
 	}
 
   /**
@@ -314,7 +314,7 @@ class HaskimailAdminClient extends HaskimailClientBase {
 		$body['name'] = $name;
 		$body['returnPathDomain'] = $returnPathDomain;
 
-		return new DynamicResponseModel($this->processRestRequest('POST', '/domains/', $body));
+		return new DynamicResponseModel($this->processRestRequest('POST', '/domains', $body));
 	}
 
   /**
@@ -351,7 +351,7 @@ class HaskimailAdminClient extends HaskimailClientBase {
 	 * @return DynamicResponseModel
 	 */
 	function verifyDomainSPF($id) {
-		return new DynamicResponseModel($this->processRestRequest('POST', "/domains/$id/verifyspf"));
+		return new DynamicResponseModel($this->processRestRequest('PUT', "/domains/$id/verifyspf"));
 	}
 
   /**
