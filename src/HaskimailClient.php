@@ -249,61 +249,6 @@ class HaskimailClient extends HaskimailClientBase {
 	}
 
 	/**
-	 * Get the settings for the server associated with this HaskimailClient instance
-	 * (defined by the $server_token you passed when instantiating this client)
-	 *
-	 * @return DynamicResponseModel
-	 */
-	function getServer() {
-		return new DynamicResponseModel($this->processRestRequest('GET', '/servers'));
-	}
-
-	/**
-	 * Modify the associated Server. Any parameters passed with NULL will be
-	 * ignored (their existing values will not be modified).
-	 *
-	 * @param  string $name Set the name of the server.
-	 * @param  string $color Set the color for the server in the Haskimail WebUI (must be: 'purple', 'blue', 'turqoise', 'green', 'red', 'yellow', or 'grey')
-	 * @param  bool $rawEmailEnabled Enable raw email to be sent with inbound.
-	 * @param  bool $smtpApiActivated Specifies whether or not SMTP is enabled on this server.
-	 * @param  string $inboundHookUrl URL to POST to everytime an inbound event occurs.
-	 * @param  string $bounceHookUrl URL to POST to everytime a bounce event occurs.
-	 * @param  string $openHookUrl URL to POST to everytime an open event occurs.
-	 * @param  bool $postFirstOpenOnly If set to true, only the first open by a particular recipient will initiate the open webhook. Any subsequent opens of the same email by the same recipient will not initiate the webhook.
-	 * @param  bool $trackOpens Indicates if all emails being sent through this server have open tracking enabled.
-	 * @param  string $inboundDomain Inbound domain for MX setup.
-	 * @param  integer $inboundSpamThreshold The maximum spam score for an inbound message before it's blocked (range from 0-30).
-	 * @param  string $trackLinks Indicates if all emails being sent through this server have link tracking enabled.
-	 * @param  string $clickHookUrl URL to POST to everytime an click event occurs.
-	 * @param  string $deliveryHookUrl URL to POST to everytime an click event occurs.
-	 * @return DynamicResponseModel
-	 */
-	function editServer($name = NULL, $color = NULL, $rawEmailEnabled = NULL,
-		$smtpApiActivated = NULL, $inboundHookUrl = NULL, $bounceHookUrl = NULL,
-		$openHookUrl = NULL, $postFirstOpenOnly = NULL, $trackOpens = NULL,
-		$inboundDomain = NULL, $inboundSpamThreshold = NULL,
-		$trackLinks = NULL, $clickHookUrl = NULL, $deliveryHookUrl = NULL) {
-
-		$body = array();
-		$body["Name"] = $name;
-		$body["Color"] = $color;
-		$body["RawEmailEnabled"] = $rawEmailEnabled;
-		$body["SmtpApiActivated"] = $smtpApiActivated;
-		$body["InboundHookUrl"] = $inboundHookUrl;
-		$body["BounceHookUrl"] = $bounceHookUrl;
-		$body["OpenHookUrl"] = $openHookUrl;
-		$body["PostFirstOpenOnly"] = $postFirstOpenOnly;
-		$body["TrackOpens"] = $trackOpens;
-		$body["InboundDomain"] = $inboundDomain;
-		$body["InboundSpamThreshold"] = $inboundSpamThreshold;
-		$body['trackLinks'] = $trackLinks;
-		$body["ClickHookUrl"] = $clickHookUrl;
-		$body["DeliveryHookUrl"] = $deliveryHookUrl;
-
-		return new DynamicResponseModel($this->processRestRequest('PUT', '/server', $body));
-	}
-
-	/**
 	 * Search messages that have been sent using this Server.
 	 *
 	 * @param  integer $count How many messages to retrieve at once (defaults to 100)
