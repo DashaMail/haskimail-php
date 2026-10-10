@@ -249,32 +249,6 @@ class HaskimailAdminClient extends HaskimailClientBase {
 		return new DynamicResponseModel($this->processRestRequest('POST', "/senders/$id/resend"));
 	}
 
-	/**
-	 * Request that the Haskimail API updates verify the SPF records associated
-	 * with the Sender Signature's email address's domain. Configuring SPF is not required to use
-	 * Haskimail, but it is highly recommended, and can improve delivery rates.
-	 *
-   * @deprecated verifyDomainSPF replaces this method
-	 * @param  integer $id The ID for the Sender Signature for which we wish to verify the SPF records.
-	 * @return DynamicResponseModel
-	 */
-	function verifySenderSignatureSPF($id) {
-		return new DynamicResponseModel($this->processRestRequest('POST', "/senders/$id/verifyspf"));
-	}
-
-	/**
-	 * Cause a new DKIM key to be generated and associated with the Sender Signature. This key must be added
-	 * to your email domain's DNS records. Including DKIM is not required, but is recommended. For more information
-	 * on DKIM and its purpose, see http://www.dkim.org/
-	 *
-   * @deprecated rotateDKIMForDomain replaces this method.
-	 * @param  integer $id The ID for the Sender Signature for which we wish to get an updated DKIM configuration.
-	 * @return DynamicResponseModel
-	 */
-	function requestNewSenderSignatureDKIM($id) {
-		return new DynamicResponseModel($this->processRestRequest('POST', "/senders/$id/requestnewdkim"));
-	}
-
   /**
 	 * Get a "page" of Domains.
 	 *
@@ -315,21 +289,6 @@ class HaskimailAdminClient extends HaskimailClientBase {
 		$body['returnPathDomain'] = $returnPathDomain;
 
 		return new DynamicResponseModel($this->processRestRequest('POST', '/domains', $body));
-	}
-
-  /**
-	 * Alter the properties of a Domain.
-	 *
-	 * @param  integer $id The ID for the Domain we wish to modify.
-	 * @param  string $returnPathDomain The custom Return-Path domain for the Domain.
-	 * @return DynamicResponseModel
-	 */
-	function editDomain($id, $returnPathDomain = NULL) {
-
-		$body = array();
-		$body['returnPathDomain'] = $returnPathDomain;
-
-		return new DynamicResponseModel($this->processRestRequest('PUT', "/domains/$id", $body));
 	}
 
   /**

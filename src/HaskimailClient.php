@@ -262,19 +262,6 @@ class HaskimailClient extends HaskimailClientBase {
 	}
 
 	/**
-	 * Get a "dump" for a specific bounce.
-	 *
-	 * @param  integer $id The ID of the bounce for which we want a dump.
-	 *
-	 * If the $id value is greater than PHP_INT_MAX, the ID can be passed as a string.
-	 *
-	 * @return string
-	 */
-	function getBounceDump($id) {
-		return new DynamicResponseModel($this->processRestRequest('GET', "/bounces/$id/dump"));
-	}
-
-	/**
 	 * Cause the email address associated with a Bounce to be reactivated.
 	 *
 	 * @param  integer $id The bounce which has a deactivated email address.
@@ -391,16 +378,6 @@ class HaskimailClient extends HaskimailClientBase {
 	 */
 	function getOutboundMessageDetails($id) {
 		return new DynamicResponseModel($this->processRestRequest('GET', "/messages/outbound/$id/details"));
-	}
-
-	/**
-	 * Get the raw content for a message that was sent.
-	 * This response
-	 * @param  string $id The ID of the message for which we want a dump.
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundMessageDump($id) {
-		return new DynamicResponseModel($this->processRestRequest('GET', "/messages/outbound/$id/dump"));
 	}
 
 	/**
@@ -761,25 +738,6 @@ class HaskimailClient extends HaskimailClientBase {
 	}
 
 	/**
-	 * Get reading times for the messages sent using this Server,
-	 * optionally filtering on message tag, and a to and from date.
-	 *
-	 * @param  string $tag Filter by tag.
-	 * @param  string $fromdate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $todate  must be of the format 'YYYY-MM-DD'
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundReadTimeStatistics($tag = NULL, $fromdate = NULL, $todate = NULL) {
-		$query = array();
-
-		$query['tag'] = $tag;
-		$query['fromdate'] = $fromdate;
-		$query['todate'] = $todate;
-
-		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/opens/readtimes', $query));
-	}
-
-	/**
 	 * Get click statistics for the messages sent using this Server,
 	 * optionally filtering on message tag, and a to and from date.
 	 *
@@ -841,28 +799,6 @@ class HaskimailClient extends HaskimailClientBase {
 		$query['messagestream'] = $messagestream;
 
 		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/clicks/platforms', $query));
-	}
-
-	/**
-	 * Get information about part of the message (HTML or Text)
-	 * tracked links were clicked from in messages sent using this Server,
-	 * optionally filtering on message tag, and a to and from date.
-	 *
-	 * @param  string $tag Filter by tag.
-	 * @param  string $fromdate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $todate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $messagestream Filter by Message Stream ID. If null, the default "outbound" transactional stream will be used.
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundClickLocationStatistics($tag = NULL, $fromdate = NULL, $todate = NULL, $messagestream = NULL) {
-		$query = array();
-
-		$query['tag'] = $tag;
-		$query['fromdate'] = $fromdate;
-		$query['todate'] = $todate;
-		$query['messagestream'] = $messagestream;
-
-		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/clicks/location', $query));
 	}
 
 	/**
