@@ -312,17 +312,5 @@ class HaskimailAdminClient extends HaskimailClientBase {
 	function verifyDomainSPF($id) {
 		return new DynamicResponseModel($this->processRestRequest('PUT', "/domains/$id/verifyspf"));
 	}
-
-  /**
-	 * Rotate DKIM keys associated with the Domain. This key must be added
-	 * to your DNS records. Including DKIM is not required, but is recommended. For more information
-	 * on DKIM and its purpose, see http://www.dkim.org/
-	 *
-	 * @param  integer $id The ID for the Domain for which we wish to get an updated DKIM configuration.
-	 * @return DynamicResponseModel
-	 */
-	function rotateDKIMForDomain($id) {
-		return new DynamicResponseModel($this->processRestRequest('POST', "/domains/$id/rotatedkim"));
-	}
 }
 ?>
