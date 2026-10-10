@@ -573,27 +573,6 @@ class HaskimailClient extends HaskimailClientBase {
 	}
 
 	/**
-	 * Get bounce statistics for the messages sent using this Server,
-	 * optionally filtering on message tag, and a to and from date.
-	 *
-	 * @param  string $tag Filter by tag.
-	 * @param  string $fromdate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $todate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $messagestream Filter by Message Stream ID. If null, the default "outbound" transactional stream will be used.
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundTrackedStatistics($tag = NULL, $fromdate = NULL, $todate = NULL, $messagestream = NULL) {
-		$query = array();
-
-		$query['tag'] = $tag;
-		$query['fromdate'] = $fromdate;
-		$query['todate'] = $todate;
-		$query['messagestream'] = $messagestream;
-
-		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/tracked', $query));
-	}
-
-	/**
 	 * Get open statistics for the messages sent using this Server,
 	 * optionally filtering on message tag, and a to and from date.
 	 *
@@ -615,48 +594,6 @@ class HaskimailClient extends HaskimailClientBase {
 	}
 
 	/**
-	 * Get platform statistics for the messages sent using this Server,
-	 * optionally filtering on message tag, and a to and from date.
-	 *
-	 * @param  string $tag Filter by tag.
-	 * @param  string $fromdate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $todate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $messagestream Filter by Message Stream ID. If null, the default "outbound" transactional stream will be used.
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundPlatformStatistics($tag = NULL, $fromdate = NULL, $todate = NULL, $messagestream = NULL) {
-		$query = array();
-
-		$query['tag'] = $tag;
-		$query['fromdate'] = $fromdate;
-		$query['todate'] = $todate;
-		$query['messagestream'] = $messagestream;
-
-		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/opens/platforms', $query));
-	}
-
-	/**
-	 * Get email client statistics for the messages sent using this Server,
-	 * optionally filtering on message tag, and a to and from date.
-	 *
-	 * @param  string $tag Filter by tag.
-	 * @param  string $fromdate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $todate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $messagestream Filter by Message Stream ID. If null, the default "outbound" transactional stream will be used.
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundEmailClientStatistics($tag = NULL, $fromdate = NULL, $todate = NULL, $messagestream = NULL) {
-		$query = array();
-
-		$query['tag'] = $tag;
-		$query['fromdate'] = $fromdate;
-		$query['todate'] = $todate;
-		$query['messagestream'] = $messagestream;
-
-		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/opens/emailclients', $query));
-	}
-
-	/**
 	 * Get click statistics for the messages sent using this Server,
 	 * optionally filtering on message tag, and a to and from date.
 	 *
@@ -675,49 +612,6 @@ class HaskimailClient extends HaskimailClientBase {
 		$query['messagestream'] = $messagestream;
 
 		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/clicks', $query));
-	}
-
-	/**
-	 * Get information about which browsers were used to open tracked links for the messages sent using this Server,
-	 * optionally filtering on message tag, and a to and from date.
-	 *
-	 * @param  string $tag Filter by tag.
-	 * @param  string $fromdate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $todate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $messagestream Filter by Message Stream ID. If null, the default "outbound" transactional stream will be used.
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundClickBrowserFamilyStatistics($tag = NULL, $fromdate = NULL, $todate = NULL, $messagestream = NULL) {
-		$query = array();
-
-		$query['tag'] = $tag;
-		$query['fromdate'] = $fromdate;
-		$query['todate'] = $todate;
-		$query['messagestream'] = $messagestream;
-
-		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/clicks/browserfamilies', $query));
-	}
-
-	/**
-	 * Get information about which browsers platforms (Desktop, Mobile, etc.) were used to open
-	 * tracked links for the messages sent using this Server,
-	 * optionally filtering on message tag, and a to and from date.
-	 *
-	 * @param  string $tag Filter by tag.
-	 * @param  string $fromdate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $todate  must be of the format 'YYYY-MM-DD'
-	 * @param  string $messagestream Filter by Message Stream ID. If null, the default "outbound" transactional stream will be used.
-	 * @return DynamicResponseModel
-	 */
-	function getOutboundClickBrowserPlatformStatistics($tag = NULL, $fromdate = NULL, $todate = NULL, $messagestream = NULL) {
-		$query = array();
-
-		$query['tag'] = $tag;
-		$query['fromdate'] = $fromdate;
-		$query['todate'] = $todate;
-		$query['messagestream'] = $messagestream;
-
-		return new DynamicResponseModel($this->processRestRequest('GET', '/stats/clicks/platforms', $query));
 	}
 
 	/**
